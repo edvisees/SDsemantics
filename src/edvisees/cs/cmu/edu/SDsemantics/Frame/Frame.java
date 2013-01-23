@@ -2,21 +2,30 @@
  * 
  */
 package edvisees.cs.cmu.edu.SDsemantics.Frame;
+import java.io.Serializable;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
+
 /**
- * @author Mrinmaya & Sujay
+* @author Mrinmaya Sachan & Sujay Kumar Jauhar
  *
  */
-public class Frame {
+public class Frame implements Serializable {
+	
+	private String name;
 	private Hashtable <String,Relation> relationalFrame;
 	
 	public Frame(){
 		this.relationalFrame = new Hashtable<String,Relation>();
 	}
 	
-	public Frame(Hashtable<String,Relation> relationalFrame){
+	@Override
+	public String toString() {
+		String str = "\nFrame [\n\tname = " + name + "\n\trelationalFrame =\n" + relationalFrame.toString() + "\n\t]\n";
+		return str;
+	}
+
+	public Frame(String name, Hashtable<String,Relation> relationalFrame){
+		this.name = name;
 		this.relationalFrame = relationalFrame;
 	}
 	
@@ -28,6 +37,13 @@ public class Frame {
 		this.relationalFrame = relationalFrame;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	/*
 	public Frame reduceFrame(Hashtable<String,Constraint> constraints){
 		Frame frame = new Frame();

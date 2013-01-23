@@ -6,7 +6,7 @@ package edvisees.cs.cmu.edu.SDsemantics.Frame;
 import java.util.ArrayList;
 
 /**
- * @author Sujay
+ * @author Mrinmaya Sachan & Sujay Kumar Jauhar
  *
  */
 public class Constraint {
