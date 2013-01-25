@@ -2,6 +2,7 @@
  * 
  */
 package edvisees.cs.cmu.edu.SDsemantics.Frame;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -9,7 +10,9 @@ import java.util.Hashtable;
  * @author Mrinmaya Sachan & Sujay Kumar Jauhar
  *
  */
-public class Relation {
+public class Relation implements Serializable {
+	
+	private static final long serialVersionUID = 3860702354349597020L;
 	private Hashtable<String, ArrayList<String>> surfaceForm;
 	private Hashtable<String,ArrayList<String>> POS;
 	private Hashtable<String,ArrayList<String>> NER;
