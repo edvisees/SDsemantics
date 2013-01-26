@@ -24,21 +24,20 @@ import com.sleepycat.je.EnvironmentConfig;
 import edvisees.cs.cmu.edu.SDsemantics.Frame.*;
 
 /**
- * @author Mrinmaya Sachan & Sujay Kumar Jauhar
+ * @author  Sujay Kumar Jauhar
  *
  */
 public class FrameMaker {
 	
 	public static Frame relationalFrameMaker (Connection conn, String w1) throws Exception{
+		
 		String sMakeSelect = "SELECT * from Triples WHERE w1 = '"+w1+"'";
-		//int iTimeout = 30;
+		
 		// create a database connection
 		Statement stmt = conn.createStatement();
 		Hashtable<String,Relation> relTable = new Hashtable<String,Relation>();
+		
 		try {
-			//stmt.setQueryTimeout(iTimeout);
-			//stmt.executeUpdate( sMakeTable );
-			//stmt.executeUpdate( sMakeInsert );
 			ResultSet rs = stmt.executeQuery(sMakeSelect);
 			try {
 				while(rs.next()){
@@ -67,13 +66,14 @@ public class FrameMaker {
 	}
 	
 	public static void main(String args[]) throws Exception{
+		
 		//Read a database
 		//register the driver 
 		String sDriverName = "org.sqlite.JDBC";
 		Class.forName(sDriverName);
 
 		// now we set up a set of fairly basic string variables to use in the body of the code proper
-		String sTempDb = "/Users/Sujay/test.db";
+		String sTempDb = "lib/NewPropstore1.db";
 		String sJdbc = "jdbc:sqlite";
 		String sDbUrl = sJdbc + ":" + sTempDb;
 		Connection conn = DriverManager.getConnection(sDbUrl);
@@ -83,7 +83,7 @@ public class FrameMaker {
 		// environment will be created if not exists
 		envConf.setAllowCreate(true);
 		// open/create the DB environment using config
-		Environment dbEnv = new Environment(new File("/Users/Sujay/Documents/workspace/SDsemantics/lib/bdb"), envConf);
+		Environment dbEnv = new Environment(new File("lib/bdb"), envConf);
 		// create a configuration for DB
 		DatabaseConfig dbConf = new DatabaseConfig();
 		// db will be created if not exits
@@ -118,15 +118,15 @@ public class FrameMaker {
 		}
 		
 		//Check if frames have been properly inserted in database
-//		for (String w : words){
-//			DatabaseEntry key = new DatabaseEntry();
-//			StringBinding.stringToEntry(w, key);
-//			DatabaseEntry data = new DatabaseEntry();
-//		    frameDB.get(null, key, data, null);
-//		    Frame f = new Frame();
-//		    f = (Frame) dataBinding.entryToObject(data);
-//		    System.out.println(f.toString());
-//		}
+		for (String w : words){
+			DatabaseEntry key = new DatabaseEntry();
+			StringBinding.stringToEntry(w, key);
+			DatabaseEntry data = new DatabaseEntry();
+		    frameDB.get(null, key, data, null);
+		    Frame f = new Frame();
+		    f = (Frame) dataBinding.entryToObject(data);
+		    System.out.println(f.toString());
+		}
 		
 		frameDB.close();
 		dbEnv.close();

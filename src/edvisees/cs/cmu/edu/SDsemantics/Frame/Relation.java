@@ -4,7 +4,10 @@
 package edvisees.cs.cmu.edu.SDsemantics.Frame;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @author Mrinmaya Sachan & Sujay Kumar Jauhar
@@ -12,7 +15,6 @@ import java.util.Hashtable;
  */
 public class Relation implements Serializable {
 	
-	private static final long serialVersionUID = 3860702354349597020L;
 	private Hashtable<String, ArrayList<String>> surfaceForm;
 	private Hashtable<String,ArrayList<String>> POS;
 	private Hashtable<String,ArrayList<String>> NER;
@@ -109,6 +111,61 @@ public class Relation implements Serializable {
 		}
 	}
 
+	public Hashtable<String, ArrayList<String>> htAdd(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
+		Hashtable<String, ArrayList<String>> surfaceForm = new Hashtable<String, ArrayList<String>>();
+		Set<String> keys = new HashSet<String>();
+		keys.addAll(surfaceForm1.keySet());
+		keys.addAll(surfaceForm2.keySet());
+		Iterator<String> itr = keys.iterator();
+		while(itr.hasNext()) {
+	         String key = itr.next();
+	         if(!surfaceForm1.containsKey(key)) surfaceForm.put(key, surfaceForm2.get(key));
+	         else if(!surfaceForm2.containsKey(key)) surfaceForm.put(key, surfaceForm1.get(key));
+	         else{
+	        	 ArrayList<String> addList = surfaceForm1.get(key);
+	        	 addList.addAll(surfaceForm2.get(key));
+	        	 surfaceForm.put(key, addList);
+	         }
+	      }
+		return surfaceForm;
+	}
+	
+	public Hashtable<String, ArrayList<String>> htMultiply(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
+		Hashtable<String, ArrayList<String>> surfaceForm = new Hashtable<String, ArrayList<String>>();
+		Set<String> keys = new HashSet<String>();
+		keys.addAll(surfaceForm1.keySet());
+		keys.addAll(surfaceForm2.keySet());
+		Iterator<String> itr = keys.iterator();
+		while(itr.hasNext()) {
+	         String key = itr.next();
+	         if(!surfaceForm1.containsKey(key));
+	         else if(!surfaceForm2.containsKey(key));
+	         else{
+	        	 ArrayList<String> addList = surfaceForm1.get(key);
+	        	 addList.retainAll(surfaceForm2.get(key));
+	        	 surfaceForm.put(key, addList);
+	         }
+	      }
+		return surfaceForm;
+	}
+	public Relation add(Relation rel){
+		Hashtable<String, ArrayList<String>> surfaceForm = htAdd(this.getSurfaceForm(),rel.getSurfaceForm());
+		Hashtable<String, ArrayList<String>> POS = htAdd(this.getPOS(),rel.getPOS());
+		Hashtable<String, ArrayList<String>> NER = htAdd(this.getNER(),rel.getNER());
+		Hashtable<String, ArrayList<String>> SST = htAdd(this.getSST(),rel.getSST());
+		Hashtable<String, ArrayList<String>> lemma = htAdd(this.getLemma(),rel.getLemma());
+		return new Relation(surfaceForm,POS,NER,SST,lemma);
+	}
+	
+	public Relation multiply(Relation rel){
+		Hashtable<String, ArrayList<String>> surfaceForm = htMultiply(this.getSurfaceForm(),rel.getSurfaceForm());
+		Hashtable<String, ArrayList<String>> POS = htMultiply(this.getPOS(),rel.getPOS());
+		Hashtable<String, ArrayList<String>> NER = htMultiply(this.getNER(),rel.getNER());
+		Hashtable<String, ArrayList<String>> SST = htMultiply(this.getSST(),rel.getSST());
+		Hashtable<String, ArrayList<String>> lemma = htMultiply(this.getLemma(),rel.getLemma());
+		return new Relation(surfaceForm,POS,NER,SST,lemma);
+	}
+	
 	@Override
 	public String toString() {
 		return "\tRelation [\n\tsurfaceForm=" + surfaceForm.toString() + "\n\tPOS=" + POS.toString()
