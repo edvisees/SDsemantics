@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import edvisees.cs.cmu.edu.SDsemantics.Frame.Frame;
-import edvisees.cs.cmu.edu.SDsemantics.Frame.Relation;
+import edvisees.cs.cmu.edu.SDsemantics.Frame.FrameComponent;
 /**
  * @author Mrinmaya Sachan
  * I think that compositions should be implemented as functions in Frame.java ??
@@ -14,13 +14,21 @@ import edvisees.cs.cmu.edu.SDsemantics.Frame.Relation;
 public class Composition{
 	private Frame frame1;
 	private Frame frame2;
-	
+	private String relName;
+
 	public Composition(){}
 	
 	public Composition(Frame frame1, Frame frame2) {
 		super();
 		this.frame1 = frame1;
 		this.frame2 = frame2;
+	}
+
+	public Composition(Frame frame1, Frame frame2, String relName) {
+		super();
+		this.frame1 = frame1;
+		this.frame2 = frame2;
+		this.relName = relName;
 	}
 
 	public Frame getFrame1() {
@@ -39,10 +47,17 @@ public class Composition{
 		this.frame2 = frame2;
 	}
 	
+	public String getRelName() {
+		return relName;
+	}
+
+	public void setRelName(String relName) {
+		this.relName = relName;
+	}
 	public Frame add(){
-		Hashtable <String,Relation> relationalFrame = new Hashtable<String,Relation>();
-		Hashtable <String,Relation> relationalFrame1 = frame1.getRelationalFrame();
-		Hashtable <String,Relation> relationalFrame2 = frame2.getRelationalFrame();
+		Hashtable <String,FrameComponent> relationalFrame = new Hashtable<String,FrameComponent>();
+		Hashtable <String,FrameComponent> relationalFrame1 = frame1.getRelationalFrame();
+		Hashtable <String,FrameComponent> relationalFrame2 = frame2.getRelationalFrame();
 		
 		Set<String> keys = new HashSet<String>();
 		keys.addAll(relationalFrame1.keySet());
@@ -54,7 +69,7 @@ public class Composition{
 	         if(!relationalFrame1.containsKey(key)) relationalFrame.put(key, relationalFrame2.get(key));
 	         else if(!relationalFrame2.containsKey(key)) relationalFrame.put(key, relationalFrame1.get(key));
 	         else{
-	        	 Relation rel = relationalFrame1.get(key).add(relationalFrame2.get(key));
+	        	 FrameComponent rel = relationalFrame1.get(key).add(relationalFrame2.get(key));
 	        	 relationalFrame.put(key, rel);
 	         }
 	      }
@@ -62,9 +77,9 @@ public class Composition{
 	}
 
 	public Frame multiply(){
-		Hashtable <String,Relation> relationalFrame = new Hashtable<String,Relation>();
-		Hashtable <String,Relation> relationalFrame1 = frame1.getRelationalFrame();
-		Hashtable <String,Relation> relationalFrame2 = frame2.getRelationalFrame();
+		Hashtable <String,FrameComponent> relationalFrame = new Hashtable<String,FrameComponent>();
+		Hashtable <String,FrameComponent> relationalFrame1 = frame1.getRelationalFrame();
+		Hashtable <String,FrameComponent> relationalFrame2 = frame2.getRelationalFrame();
 		
 		Set<String> keys = new HashSet<String>();
 		keys.addAll(relationalFrame1.keySet());
@@ -76,11 +91,18 @@ public class Composition{
 	         if(!relationalFrame1.containsKey(key)) relationalFrame.put(key, relationalFrame2.get(key));
 	         else if(!relationalFrame2.containsKey(key)) relationalFrame.put(key, relationalFrame1.get(key));
 	         else{
-	        	 Relation rel = relationalFrame1.get(key).multiply(relationalFrame2.get(key));
+	        	 FrameComponent rel = relationalFrame1.get(key).multiply(relationalFrame2.get(key));
 	        	 relationalFrame.put(key, rel);
 	         }
 	      }
 		return new Frame(frame1.getName()+"*"+frame2.getName(),relationalFrame);
 	}
+	
+//	public Frame relationalComposer1(Connection relCompose1DB, Frame frame1, Frame frame2){
+	
+//This function takes frame1 and frame2, fetches rel1 and rel2 from relComposeDB and returns r1.*t1 + r2.*t2
+	
+//		return null;
+//	}
 	
 }

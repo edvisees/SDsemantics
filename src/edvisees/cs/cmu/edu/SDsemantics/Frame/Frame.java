@@ -16,10 +16,10 @@ public class Frame implements Serializable {
 	 */
 	private static final long serialVersionUID = 3895655797236013992L;
 	private String name;
-	private Hashtable <String,Relation> relationalFrame;
+	private Hashtable <String,FrameComponent> relationalFrame;
 	
 	public Frame(){
-		this.relationalFrame = new Hashtable<String,Relation>();
+		this.relationalFrame = new Hashtable<String,FrameComponent>();
 	}
 	
 	@Override
@@ -28,16 +28,16 @@ public class Frame implements Serializable {
 		return str;
 	}
 
-	public Frame(String name, Hashtable<String,Relation> relationalFrame){
+	public Frame(String name, Hashtable<String,FrameComponent> relationalFrame){
 		this.name = name;
 		this.relationalFrame = relationalFrame;
 	}
 	
-	public Hashtable<String, Relation> getRelationalFrame() {
+	public Hashtable<String, FrameComponent> getRelationalFrame() {
 		return relationalFrame;
 	}
 
-	public void setRelationalFrame(Hashtable<String, Relation> relationalFrame) {
+	public void setRelationalFrame(Hashtable<String, FrameComponent> relationalFrame) {
 		this.relationalFrame = relationalFrame;
 	}
 	

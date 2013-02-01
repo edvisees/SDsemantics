@@ -41,7 +41,7 @@ public class FrameMaker {
 		
 		// create a database connection
 		Statement stmt = conn.createStatement();
-		Hashtable<String,Relation> relTable = new Hashtable<String,Relation>();
+		Hashtable<String,FrameComponent> relTable = new Hashtable<String,FrameComponent>();
 		
 		try {
 			ResultSet rs = stmt.executeQuery(sMakeSelect);
@@ -53,9 +53,9 @@ public class FrameMaker {
 						String temp[] = rs.getString("sentenceIDs").replace("-0","").split("_");				
 						String sentenceIds[] = Arrays.copyOfRange(temp,0,temp.length);
 						//Create if required
-						Relation reltn;
+						FrameComponent reltn;
 						if(!relTable.containsKey(sResultRel)){
-							reltn = new Relation();
+							reltn = new FrameComponent();
 						} else {
 							reltn = relTable.get(sResultRel);
 						}

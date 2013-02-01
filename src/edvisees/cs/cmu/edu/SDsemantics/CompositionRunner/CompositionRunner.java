@@ -19,5 +19,8 @@ public class CompositionRunner {
 		
 		Frame product = comp.multiply();
 		System.out.println("Product frame is \n"+product.toString());
+		
+//		Frame relCompose = comp.relationalComposer1(frameDB, goldDB, frame1, frame2);
+//		System.out.println("Realtional Composed frame is \n"+relCompose.toString());
 	}
 }

@@ -13,7 +13,7 @@ import java.util.Set;
  * @author Mrinmaya Sachan & Sujay Kumar Jauhar
  *
  */
-public class Relation implements Serializable {
+public class FrameComponent implements Serializable {
 	
 	/**
 	 * 
@@ -25,7 +25,7 @@ public class Relation implements Serializable {
 	private Hashtable<String,ArrayList<String>> SST;
 	private Hashtable<String,ArrayList<String>> lemma;
 	
-	public Relation(){
+	public FrameComponent(){
 		this.surfaceForm = new Hashtable<String,ArrayList<String>>();
 		this.POS = new Hashtable<String,ArrayList<String>>();
 		this.NER = new Hashtable<String,ArrayList<String>>();
@@ -33,7 +33,7 @@ public class Relation implements Serializable {
 		this.lemma = new Hashtable<String,ArrayList<String>>();
 	}
 	
-	public Relation(Hashtable<String, ArrayList<String>> surfaceForm, Hashtable<String, ArrayList<String>> POS, Hashtable<String, ArrayList<String>> NER, Hashtable<String, ArrayList<String>> SST, Hashtable<String, ArrayList<String>> lemma){
+	public FrameComponent(Hashtable<String, ArrayList<String>> surfaceForm, Hashtable<String, ArrayList<String>> POS, Hashtable<String, ArrayList<String>> NER, Hashtable<String, ArrayList<String>> SST, Hashtable<String, ArrayList<String>> lemma){
 		this.surfaceForm = surfaceForm;
 		this.POS = POS;
 		this.NER = NER;
@@ -152,22 +152,22 @@ public class Relation implements Serializable {
 	      }
 		return surfaceForm;
 	}
-	public Relation add(Relation rel){
+	public FrameComponent add(FrameComponent rel){
 		Hashtable<String, ArrayList<String>> surfaceForm = htAdd(this.getSurfaceForm(),rel.getSurfaceForm());
 		Hashtable<String, ArrayList<String>> POS = htAdd(this.getPOS(),rel.getPOS());
 		Hashtable<String, ArrayList<String>> NER = htAdd(this.getNER(),rel.getNER());
 		Hashtable<String, ArrayList<String>> SST = htAdd(this.getSST(),rel.getSST());
 		Hashtable<String, ArrayList<String>> lemma = htAdd(this.getLemma(),rel.getLemma());
-		return new Relation(surfaceForm,POS,NER,SST,lemma);
+		return new FrameComponent(surfaceForm,POS,NER,SST,lemma);
 	}
 	
-	public Relation multiply(Relation rel){
+	public FrameComponent multiply(FrameComponent rel){
 		Hashtable<String, ArrayList<String>> surfaceForm = htMultiply(this.getSurfaceForm(),rel.getSurfaceForm());
 		Hashtable<String, ArrayList<String>> POS = htMultiply(this.getPOS(),rel.getPOS());
 		Hashtable<String, ArrayList<String>> NER = htMultiply(this.getNER(),rel.getNER());
 		Hashtable<String, ArrayList<String>> SST = htMultiply(this.getSST(),rel.getSST());
 		Hashtable<String, ArrayList<String>> lemma = htMultiply(this.getLemma(),rel.getLemma());
-		return new Relation(surfaceForm,POS,NER,SST,lemma);
+		return new FrameComponent(surfaceForm,POS,NER,SST,lemma);
 	}
 	
 	@Override
