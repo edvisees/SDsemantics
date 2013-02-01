@@ -15,6 +15,10 @@ import java.util.Set;
  */
 public class Relation implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5662105077704023617L;
 	private Hashtable<String, ArrayList<String>> surfaceForm;
 	private Hashtable<String,ArrayList<String>> POS;
 	private Hashtable<String,ArrayList<String>> NER;

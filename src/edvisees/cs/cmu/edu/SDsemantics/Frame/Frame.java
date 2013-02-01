@@ -11,6 +11,10 @@ import java.util.Hashtable;
  */
 public class Frame implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3895655797236013992L;
 	private String name;
 	private Hashtable <String,Relation> relationalFrame;
 	
