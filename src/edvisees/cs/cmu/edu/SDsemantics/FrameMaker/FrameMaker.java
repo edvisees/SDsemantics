@@ -49,7 +49,7 @@ public class FrameMaker {
 				while(rs.next()){
 					String sResultW2 = rs.getString("w2");
 					String sResultRel = rs.getString("rel");
-					if(vocabList.containsKey(sResultW2) && relationList.containsKey(sResultRel)){
+					if(vocabList.containsKey(sResultW2) && relationList.containsKey(sResultRel.split("_")[0])){
 						String temp[] = rs.getString("sentenceIDs").replace("-0","").split("_");				
 						String sentenceIds[] = Arrays.copyOfRange(temp,0,temp.length);
 						//Create if required
