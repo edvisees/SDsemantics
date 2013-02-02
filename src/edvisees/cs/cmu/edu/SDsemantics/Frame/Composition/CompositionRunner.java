@@ -1,8 +1,7 @@
-package edvisees.cs.cmu.edu.SDsemantics.CompositionRunner;
+package edvisees.cs.cmu.edu.SDsemantics.Frame.Composition;
 
-import edvisees.cs.cmu.edu.SDsemantics.Composition.Composition;
 import edvisees.cs.cmu.edu.SDsemantics.Frame.Frame;
-import edvisees.cs.cmu.edu.SDsemantics.FrameMaker.FrameLoader;
+import edvisees.cs.cmu.edu.SDsemantics.Frame.FrameLoader;
 
 public class CompositionRunner {
 	public static void main(String args[]){
@@ -14,10 +13,10 @@ public class CompositionRunner {
 		
 		Composition comp = new Composition(frame1, frame2);
 		
-		Frame sum = comp.add();
+		Frame sum = comp.union();
 		System.out.println("Sum frame is \n"+sum.toString());
 		
-		Frame product = comp.multiply();
+		Frame product = comp.intersect();
 		System.out.println("Product frame is \n"+product.toString());
 		
 //		Frame relCompose = comp.relationalComposer1(frameDB, goldDB, frame1, frame2);

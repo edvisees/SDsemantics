@@ -1,4 +1,4 @@
-package edvisees.cs.cmu.edu.SDsemantics.Composition;
+package edvisees.cs.cmu.edu.SDsemantics.Frame.Composition;
 
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -54,7 +54,7 @@ public class Composition{
 	public void setRelName(String relName) {
 		this.relName = relName;
 	}
-	public Frame add(){
+	public Frame union(){
 		Hashtable <String,FrameComponent> relationalFrame = new Hashtable<String,FrameComponent>();
 		Hashtable <String,FrameComponent> relationalFrame1 = frame1.getRelationalFrame();
 		Hashtable <String,FrameComponent> relationalFrame2 = frame2.getRelationalFrame();
@@ -69,14 +69,14 @@ public class Composition{
 	         if(!relationalFrame1.containsKey(key)) relationalFrame.put(key, relationalFrame2.get(key));
 	         else if(!relationalFrame2.containsKey(key)) relationalFrame.put(key, relationalFrame1.get(key));
 	         else{
-	        	 FrameComponent rel = relationalFrame1.get(key).add(relationalFrame2.get(key));
+	        	 FrameComponent rel = relationalFrame1.get(key).union(relationalFrame2.get(key));
 	        	 relationalFrame.put(key, rel);
 	         }
 	      }
 		return new Frame(frame1.getName()+"*"+frame2.getName(),relationalFrame);
 	}
 
-	public Frame multiply(){
+	public Frame intersect(){
 		Hashtable <String,FrameComponent> relationalFrame = new Hashtable<String,FrameComponent>();
 		Hashtable <String,FrameComponent> relationalFrame1 = frame1.getRelationalFrame();
 		Hashtable <String,FrameComponent> relationalFrame2 = frame2.getRelationalFrame();
@@ -91,18 +91,20 @@ public class Composition{
 	         if(!relationalFrame1.containsKey(key)) relationalFrame.put(key, relationalFrame2.get(key));
 	         else if(!relationalFrame2.containsKey(key)) relationalFrame.put(key, relationalFrame1.get(key));
 	         else{
-	        	 FrameComponent rel = relationalFrame1.get(key).multiply(relationalFrame2.get(key));
+	        	 FrameComponent rel = relationalFrame1.get(key).intersect(relationalFrame2.get(key));
 	        	 relationalFrame.put(key, rel);
 	         }
 	      }
 		return new Frame(frame1.getName()+"*"+frame2.getName(),relationalFrame);
 	}
 	
-//	public Frame relationalComposer1(Connection relCompose1DB, Frame frame1, Frame frame2){
 	
-//This function takes frame1 and frame2, fetches rel1 and rel2 from relComposeDB and returns r1.*t1 + r2.*t2
 	
-//		return null;
-//	}
+	public Frame relationalComposer1(/*Connection relCompose1DB,*/ Frame frame1, Frame frame2, String relName){
+	
+		//This function takes frame1 and frame2, fetches rel1 and rel2 (which are of type matrix) from relComposeDB and returns r1.*t1 + r2.*t2
+		
+		return null;
+	}
 	
 }

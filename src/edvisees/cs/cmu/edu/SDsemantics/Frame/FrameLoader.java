@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edvisees.cs.cmu.edu.SDsemantics.FrameMaker;
+package edvisees.cs.cmu.edu.SDsemantics.Frame;
 
 import java.io.File;
 

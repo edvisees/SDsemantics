@@ -115,7 +115,7 @@ public class FrameComponent implements Serializable {
 		}
 	}
 
-	public Hashtable<String, ArrayList<String>> htAdd(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
+	public Hashtable<String, ArrayList<String>> htUnion(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
 		Hashtable<String, ArrayList<String>> surfaceForm = new Hashtable<String, ArrayList<String>>();
 		Set<String> keys = new HashSet<String>();
 		keys.addAll(surfaceForm1.keySet());
@@ -134,7 +134,7 @@ public class FrameComponent implements Serializable {
 		return surfaceForm;
 	}
 	
-	public Hashtable<String, ArrayList<String>> htMultiply(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
+	public Hashtable<String, ArrayList<String>> htIntersect(Hashtable<String, ArrayList<String>> surfaceForm1, Hashtable<String, ArrayList<String>> surfaceForm2){
 		Hashtable<String, ArrayList<String>> surfaceForm = new Hashtable<String, ArrayList<String>>();
 		Set<String> keys = new HashSet<String>();
 		keys.addAll(surfaceForm1.keySet());
@@ -152,21 +152,21 @@ public class FrameComponent implements Serializable {
 	      }
 		return surfaceForm;
 	}
-	public FrameComponent add(FrameComponent rel){
-		Hashtable<String, ArrayList<String>> surfaceForm = htAdd(this.getSurfaceForm(),rel.getSurfaceForm());
-		Hashtable<String, ArrayList<String>> POS = htAdd(this.getPOS(),rel.getPOS());
-		Hashtable<String, ArrayList<String>> NER = htAdd(this.getNER(),rel.getNER());
-		Hashtable<String, ArrayList<String>> SST = htAdd(this.getSST(),rel.getSST());
-		Hashtable<String, ArrayList<String>> lemma = htAdd(this.getLemma(),rel.getLemma());
+	public FrameComponent union(FrameComponent rel){
+		Hashtable<String, ArrayList<String>> surfaceForm = htUnion(this.getSurfaceForm(),rel.getSurfaceForm());
+		Hashtable<String, ArrayList<String>> POS = htUnion(this.getPOS(),rel.getPOS());
+		Hashtable<String, ArrayList<String>> NER = htUnion(this.getNER(),rel.getNER());
+		Hashtable<String, ArrayList<String>> SST = htUnion(this.getSST(),rel.getSST());
+		Hashtable<String, ArrayList<String>> lemma = htUnion(this.getLemma(),rel.getLemma());
 		return new FrameComponent(surfaceForm,POS,NER,SST,lemma);
 	}
 	
-	public FrameComponent multiply(FrameComponent rel){
-		Hashtable<String, ArrayList<String>> surfaceForm = htMultiply(this.getSurfaceForm(),rel.getSurfaceForm());
-		Hashtable<String, ArrayList<String>> POS = htMultiply(this.getPOS(),rel.getPOS());
-		Hashtable<String, ArrayList<String>> NER = htMultiply(this.getNER(),rel.getNER());
-		Hashtable<String, ArrayList<String>> SST = htMultiply(this.getSST(),rel.getSST());
-		Hashtable<String, ArrayList<String>> lemma = htMultiply(this.getLemma(),rel.getLemma());
+	public FrameComponent intersect(FrameComponent rel){
+		Hashtable<String, ArrayList<String>> surfaceForm = htIntersect(this.getSurfaceForm(),rel.getSurfaceForm());
+		Hashtable<String, ArrayList<String>> POS = htIntersect(this.getPOS(),rel.getPOS());
+		Hashtable<String, ArrayList<String>> NER = htIntersect(this.getNER(),rel.getNER());
+		Hashtable<String, ArrayList<String>> SST = htIntersect(this.getSST(),rel.getSST());
+		Hashtable<String, ArrayList<String>> lemma = htIntersect(this.getLemma(),rel.getLemma());
 		return new FrameComponent(surfaceForm,POS,NER,SST,lemma);
 	}
 	
