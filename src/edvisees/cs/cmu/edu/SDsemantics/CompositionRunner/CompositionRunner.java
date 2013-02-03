@@ -2,7 +2,7 @@ package edvisees.cs.cmu.edu.SDsemantics.CompositionRunner;
 
 import edvisees.cs.cmu.edu.SDsemantics.Composition.Composition;
 import edvisees.cs.cmu.edu.SDsemantics.Frame.Frame;
-import edvisees.cs.cmu.edu.SDsemantics.FrameMaker.FrameLoader;
+import edvisees.cs.cmu.edu.SDsemantics.Frame.FrameLoader;
 
 public class CompositionRunner {
 	public static void main(String args[]){

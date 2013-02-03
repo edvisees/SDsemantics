@@ -31,7 +31,7 @@ public class BdbHandle {
 	private DatabaseConfig dbConf;
 	private Database nameDB;
 	private StoredClassCatalog javaCatalog;
-	private EntryBinding<Frame> dataBinding;
+	private EntryBinding<Object> dataBinding;
 		
 
 	public Environment getDbEnv() {
@@ -39,7 +39,7 @@ public class BdbHandle {
 	}
 
 	public void setDbEnv(String location) {
-		this.dbEnv = new Environment(new File(location), envConf);;
+		this.dbEnv = new Environment(new File(location), envConf);
 	}
 
 	public BdbHandle() {
@@ -57,14 +57,16 @@ public class BdbHandle {
 		// create a class catalog for the database
 		javaCatalog = new StoredClassCatalog(nameDB);
 		// Need a serial binding for the data
-		dataBinding = new SerialBinding<Frame>(javaCatalog, Frame.class);
+		dataBinding = new SerialBinding<Object>(javaCatalog, Object.class);
 	}
 	
 	public void store(){
 		
 	}
 
-	public Object Load(String w){
+	public Object Load(String w, String location, String DBname){
+		this.nameDB = dbEnv.openDatabase(null, DBname, dbConf);
+		this.dbEnv = new Environment(new File(location), envConf);
 		// key
         DatabaseEntry key = new DatabaseEntry();
         // set the current word as key
@@ -72,10 +74,22 @@ public class BdbHandle {
         DatabaseEntry data = new DatabaseEntry();
         nameDB.get(null, key, data, null);
         //generalize
-        Frame f = new Frame();
-        f = (Frame) dataBinding.entryToObject(data);				
+        Object f = new Object();
+        f = dataBinding.entryToObject(data);				
 		nameDB.close();
 		dbEnv.close();
 		return f;
+	}
+	
+	public void Store(){
+		
+	}
+
+	public Database getNameDB() {
+		return nameDB;
+	}
+
+	public void setNameDB(String DBname) {
+		this.nameDB = dbEnv.openDatabase(null, DBname, dbConf);
 	}
 }

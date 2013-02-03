@@ -1,4 +1,4 @@
-package edvisees.cs.cmu.edu.SDsemantics.FrameMaker;
+package edvisees.cs.cmu.edu.SDsemantics.Utils;
 
 public class Tuple {
 	String st1;
